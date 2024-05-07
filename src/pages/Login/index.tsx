@@ -15,22 +15,31 @@ const Login: FC = () => {
     if (!name || !password) return;
     const sha256Password = cryptoPassword(password);
     login(name, sha256Password).then((res) => {
-      if (res.data.code === 200) {
-        console.log(res.data.data, "res");
-        localStorage.setItem("token", res.data.data.token);
+    debugger
+      if (res.code === 200) {
+        console.log(res.data, "res");
+        localStorage.setItem("token", res.data.token);
         // 导航至首页
-        navigate("/");
+        const redirectUrl = localStorage.getItem("redirectUrl");
+        if (redirectUrl) {
+          navigate(redirectUrl);
+          // 清除存储的 URL
+          localStorage.removeItem("redirectUrl");
+        } else {
+          // 如果没有存储的 URL，导航至首页
+          navigate("/");
+        }
       } else {
         form.setFields([
           {
             name: "name",
-            errors: ["账号不存在或密码错误"],
+            errors: [res.data.msg],
           },
         ]);
         console.log(res.data.msg, "res");
       }
     });
-    console.log("login");
+
   }, [navigate, form]);
 
   return (

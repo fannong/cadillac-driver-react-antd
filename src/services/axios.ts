@@ -1,5 +1,11 @@
 import axios from "axios";
 
+export interface myResponse {
+  code: number;
+  data: any;
+  msg: string;
+}
+
 const instance = axios.create({
   //   baseURL: "http://127.0.0.1:3000",
   baseURL: "/api",
@@ -41,13 +47,15 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   (response) => {
+    console.log(response, "response");
+
     // 如果响应中包含新的CSRF令牌，更新它
     if (response.data._csrf && response.data._csrf !== csrfToken) {
       csrfToken = response.data._csrf;
     }
 
     // 处理响应数据
-    return response;
+    return response.data;
   },
   (error) => {
     // 处理响应错误

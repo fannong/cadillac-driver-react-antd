@@ -15,5 +15,5 @@
       "noEmit": true,
       "jsx": "react"
     },
-    "include": ["src", "declarations.d.ts", "craco.config.js"]
+    "include": ["src", "declarations.d.ts", "craco.config.js", "src/App.tsx", "src/index.js"]
   }
