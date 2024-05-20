@@ -68,3 +68,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### 为何在云服务器上下载依赖时，会出现网络错误，无法安装的情况
+经过排查，发现下载包的地址都指向了公司的内网源，原来犯了个低级错误，把package.lock文件丢上去了，那么，在安装时，npm会优先按照lock文件去下载依赖
+
+### 这个项目依赖的node环境是18，而centos7由于缺少glibc2.27，云服务上无法安装最新的node18.解决方案参考文档：
+https://blog.csdn.net/qq_38225558/article/details/128641561
+
+### 如何切换到Jenkins用户：
+sudo su -s /bin/bash jenkins
+
+### 查看是否有没有公钥和私钥
+ ls -al
+
+ ### 如何编写构建脚本
+npm install
+rm -rf /dist
+npm run build
+cd dist
+#mv * /root/cadillac/build
+#cd /root/cadillac/build
+rsync -a --remove-source-files * /root/cadillac/build/
+cd ..
+rm -rf dist
+
+cd /root/cadillac/build
