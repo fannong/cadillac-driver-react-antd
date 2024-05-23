@@ -1,10 +1,9 @@
 import React, { useCallback } from "react";
 import styles from "./index.module.less";
-
-import { BrowserRouter as Router, Outlet, useNavigate, Routes, Route } from "react-router-dom";
-
+import { Outlet, useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
-import { Menu, Table } from "antd";
+import { Menu } from "antd";
+
 const Admin: React.FC = () => {
   const navigate = useNavigate();
   type MenuItem = Required<MenuProps>["items"][number];
@@ -31,20 +30,23 @@ const Admin: React.FC = () => {
     getItem("Navigation Two", "sub2", null, [getItem("Option 5", "5"), getItem("Option 6", "6")]),
   ];
 
-  const onClick: MenuProps["onClick"] = useCallback((e: any) => {
-    console.log("click", e);
-    switch (e.key) {
-      case "sing1":
-        navigate("/admin/sing1");
-        break;
-      case "1":
-        navigate("/admin/page1");
-        break;
-      case "2":
-        navigate("/admin/page2");
-        break;
-    }
-  }, []);
+  const onClick: MenuProps["onClick"] = useCallback(
+    (e: any) => {
+      console.log("click", e);
+      switch (e.key) {
+        case "sing1":
+          navigate("/admin/sing1");
+          break;
+        case "1":
+          navigate("/admin/page1");
+          break;
+        case "2":
+          navigate("/admin/page2");
+          break;
+      }
+    },
+    [navigate]
+  );
 
   return (
     <div className={styles.admin}>
