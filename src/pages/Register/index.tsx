@@ -60,6 +60,8 @@ const Login: FC = () => {
         Toast.show({
           content: "注册成功",
         });
+        // 注册成功，才清楚验证码发送时间
+        localStorage.removeItem("sendTime");
         localStorage.setItem("token", res.data.data.token);
         // 导航至首页
         navigate("/login");
@@ -108,7 +110,7 @@ const Login: FC = () => {
       email,
       code,
     });
-    localStorage.removeItem("sendTime");
+    // localStorage.removeItem("sendTime");
   }, [runRegister, form]);
 
   // 点击发送验证码按钮
