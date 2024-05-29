@@ -13,7 +13,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //   UserOutline,
 // } from "antd-mobile-icons";
 import Header from "./components/Header";
-import "normalize.css";
 
 // const tabs = [
 //   {
