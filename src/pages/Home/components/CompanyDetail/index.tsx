@@ -1,3 +1,4 @@
+import styles from "./index.module.less";
 import React, { useMemo } from "react";
 import ProjectItem from "../ProjectItem";
 import type { projectDetailType } from "../../type";
@@ -32,12 +33,10 @@ const CompanyDetail: React.FC = () => {
     ];
   }, []);
   return (
-    <div style={{ height: "400px", background: "lightgray", overflow: "scroll" }}>
-      {/* <div id="a1" style={{ height: "400px" }}> */}
+    <div className={styles.companyDetail}>
       {projectList.map((item) => {
         return <ProjectItem detail={item} />;
       })}
-      {/* </div> */}
     </div>
   );
 };

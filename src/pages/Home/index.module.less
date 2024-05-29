@@ -1,14 +1,21 @@
 .home {
   display: flex;
-  padding: 0 100px;
+  @media screen and (max-width: 750px) {
+    padding: 0;
+  }
+  @media screen and (min-width: 750px) {
+    padding: 0 100px;
+  }
+
   .menu {
     padding: 10px 0px;
     box-sizing: border-box;
-    // background: lightblue;
     height: calc(100vh - 90px);
     overflow-y: auto;
   }
-  // .ant-menu {
-  //   max-height: ;
-  // }
+  .childWrapper {
+    padding-left: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

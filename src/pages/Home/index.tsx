@@ -132,7 +132,7 @@ const Home: React.FC = () => {
           items={items}
         />
       </div>
-      <div style={{ padding: "0 60px", width: "100%", boxSizing: "border-box" }}>
+      <div className={styles.childWrapper}>
         <Outlet></Outlet>
       </div>
     </div>
