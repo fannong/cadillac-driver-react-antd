@@ -77,8 +77,8 @@ const App: FC = () => {
     if (window.location.pathname === "/login" || window.location.pathname === "/register") return;
     const token = localStorage.getItem("token");
     if (!token) {
-      localStorage.setItem("redirectUrl", window.location.pathname);
-      window.location.href = "/login";
+      // localStorage.setItem("redirectUrl", window.location.pathname);
+      // window.location.href = "/login";
     } else {
       tokenValidRun(token);
     }
