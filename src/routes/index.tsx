@@ -5,11 +5,26 @@ import Register from "../pages/Register";
 import Production from "../pages/Production";
 import Admin from "../pages/Admin";
 import Page1 from "../pages/Admin/page1";
-
+import Mine from "@/pages/Home/components/Mine";
+import CompanyDetail from "@/pages/Home/components/CompanyDetail";
 const routes = [
   {
     path: "/",
     element: <Home></Home>,
+    children: [
+      {
+        path: "mine",
+        element: <Mine></Mine>,
+      },
+      {
+        path: "introduce",
+        element: <div>introduce</div>,
+      },
+      {
+        path: "company",
+        element: <CompanyDetail />,
+      },
+    ],
   },
   {
     path: "/register",

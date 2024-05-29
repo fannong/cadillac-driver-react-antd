@@ -1,8 +1,13 @@
 // craco.config.js
 const CracoLessPlugin = require("craco-less");
+const path = require("path");
+const resolve = (dir) => path.resolve(__dirname, dir);
 
 module.exports = {
   webpack: {
+    alias: {
+      "@": resolve("src"),
+    },
     configure: (webpackConfig, { env, paths }) => {
       // 在这里修改 webpackConfig 对象
       webpackConfig.module.rules.push({
@@ -10,7 +15,6 @@ module.exports = {
         use: ["@svgr/webpack"],
       });
       return webpackConfig;
-
     },
   },
   devServer: {

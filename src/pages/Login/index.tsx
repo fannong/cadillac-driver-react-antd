@@ -15,7 +15,6 @@ const Login: FC = () => {
     if (!name || !password) return;
     const sha256Password = cryptoPassword(password);
     login(name, sha256Password).then((res) => {
-    debugger
       if (res.code === 200) {
         console.log(res.data, "res");
         localStorage.setItem("token", res.data.token);
