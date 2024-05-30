@@ -5,6 +5,7 @@ import styles from "./index.module.less";
 import { Menu } from "antd";
 import type { MenuProps } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
+import Header from "@/components/Header";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -120,23 +121,26 @@ const Home: React.FC = () => {
     // });
   }, []);
   return (
-    <div className={styles.home}>
-      <div className={styles.menu}>
-        <Menu
-          theme="light"
-          onSelect={onSelect}
-          onClick={onClick}
-          style={{ width: 256 }}
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          mode="inline"
-          items={items}
-        />
+    <>
+      <Header />
+      <div className={styles.home}>
+        <div className={styles.menu}>
+          <Menu
+            theme="light"
+            onSelect={onSelect}
+            onClick={onClick}
+            style={{ width: 256 }}
+            defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
+            mode="inline"
+            items={items}
+          />
+        </div>
+        <div className={styles.childWrapper}>
+          <Outlet></Outlet>
+        </div>
       </div>
-      <div className={styles.childWrapper}>
-        <Outlet></Outlet>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@
     "antd-mobile": "^5.34.0",
     "axios": "^1.6.7",
     "craco-less": "^3.0.1",
+    "dayjs": "^1.11.11",
     "less": "^4.2.0",
     "less-loader": "^11.1.2",
     "postcss-loader": "^7.0.0",

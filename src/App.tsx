@@ -12,7 +12,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //   UnorderedListOutline,
 //   UserOutline,
 // } from "antd-mobile-icons";
-import Header from "./components/Header";
 
 // const tabs = [
 //   {
@@ -86,7 +85,7 @@ const App: FC = () => {
   }, []);
   return (
     <>
-      <Header />
+    
       <Router>
         <Routes>
           {routes.map((item) => (

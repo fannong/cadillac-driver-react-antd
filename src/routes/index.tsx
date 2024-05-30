@@ -7,6 +7,8 @@ import Admin from "../pages/Admin";
 import Page1 from "../pages/Admin/page1";
 import Mine from "@/pages/Home/components/Mine";
 import CompanyDetail from "@/pages/Home/components/CompanyDetail";
+import AddProject from "@/pages/Admin/AddProject";
+
 const routes = [
   {
     path: "/",
@@ -43,8 +45,8 @@ const routes = [
     element: <Admin></Admin>,
     children: [
       {
-        path: "sing1",
-        element: <div>sing1</div>,
+        path: "addProject",
+        element: <AddProject />,
       },
       {
         path: "page1",
