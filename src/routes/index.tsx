@@ -21,7 +21,7 @@ const routes = [
         element: <div>introduce</div>,
       },
       {
-        path: "company",
+        path: "company/:id",
         element: <CompanyDetail />,
       },
     ],

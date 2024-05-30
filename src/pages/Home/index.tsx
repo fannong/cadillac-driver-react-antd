@@ -25,32 +25,32 @@ const Home: React.FC = () => {
       type: "divider",
     },
     {
-      key: "company",
+      key: "company/a",
       label: "Company A",
       icon: <MailOutlined />,
       children: [
         {
           key: "g1",
-          label: "Item 1",
+          label: "Business",
           type: "group",
           children: [
-            { key: "a1", label: "Option 1" },
-            { key: "a2", label: "Option 2" },
+            { key: "a1", label: "project 1" },
+            { key: "a2", label: "project 2" },
           ],
         },
         {
           key: "g2",
-          label: "Item 2",
+          label: "Customer",
           type: "group",
           children: [
-            { key: "a3", label: "Option 3" },
-            { key: "a4", label: "Option 4" },
+            { key: "a3", label: "project 3" },
+            { key: "a4", label: "project 4" },
           ],
         },
       ],
     },
     {
-      key: "company",
+      key: "company/b",
       label: "Company B",
       icon: <AppstoreOutlined />,
       children: [
@@ -68,7 +68,7 @@ const Home: React.FC = () => {
     },
 
     {
-      key: "company",
+      key: "company/c",
       label: "Company C",
       icon: <SettingOutlined />,
       children: [
@@ -123,6 +123,7 @@ const Home: React.FC = () => {
     <div className={styles.home}>
       <div className={styles.menu}>
         <Menu
+          theme="light"
           onSelect={onSelect}
           onClick={onClick}
           style={{ width: 256 }}
