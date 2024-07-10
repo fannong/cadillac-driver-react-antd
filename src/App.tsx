@@ -78,14 +78,14 @@ const App: FC = () => {
     if (!token) {
       // localStorage.setItem("redirectUrl", window.location.pathname);
       // window.location.href = "/login";
-    } else {
+    } else if (1 !== Number("1")) {
+      // 开发阶段，暂不执行token验证
       tokenValidRun(token);
     }
     // eslint-disable-next-line
   }, []);
   return (
     <>
-    
       <Router>
         <Routes>
           {routes.map((item) => (

@@ -1,14 +1,6 @@
-export interface projectDetailType {
-  id: string;
-  name: string;
-  time: string;
-  description: string;
-  cover: string;
-  content: string[];
-  skill?: string[];
-}
+import type { CompanyProjectType } from "../../services/company";
 
-export interface projectDetailProps {
+export type projectDetailProps = {
   index: number;
-  detail: projectDetailType;
-}
+  detail: CompanyProjectType;
+};
