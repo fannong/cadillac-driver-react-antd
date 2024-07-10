@@ -120,7 +120,7 @@ const Home: React.FC = () => {
     [items1]
   );
 
-  const { data } = useRequest(getCompanyList, {
+  useRequest(getCompanyList, {
     onSuccess: (res) => {
       console.log(res.data);
       formatResToMenu(res.data);
