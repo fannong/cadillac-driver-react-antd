@@ -261,7 +261,7 @@ const AddProject: React.FC = () => {
                             required: true,
                             validator: (_, value) => {
                               console.log(value, "Company Icon");
-                              if (!value || !value.fileList.length) {
+                              if (!value) {
                                 return Promise.reject(new Error("can not be empty"));
                               } else {
                                 return Promise.resolve();
