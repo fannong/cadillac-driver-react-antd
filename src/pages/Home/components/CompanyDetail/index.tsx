@@ -1,5 +1,5 @@
 import styles from "./index.module.less";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import ProjectItem from "../ProjectItem";
 
 import { useParams } from "react-router-dom";
@@ -11,15 +11,6 @@ import type { CompanyDetailType } from "@/services/company";
 const CompanyDetail: React.FC = () => {
   const [companyDetail, setCompanyDetail] = useState<CompanyDetailType | undefined>();
   const { id } = useParams();
-  useEffect(() => {
-    // console.log(id, "CompanyDetail");
-    if (!id) {
-      return;
-    }
-    run(id);
-    // 获取当前路由参数
-  }, [id]);
-
   const { run } = useRequest(getCompanyDetailById, {
     manual: true,
     onSuccess: (res) => {
@@ -28,6 +19,17 @@ const CompanyDetail: React.FC = () => {
       setCompanyDetail(res.data);
     },
   });
+  
+  useEffect(() => {
+    // console.log(id, "CompanyDetail");
+    if (!id) {
+      return;
+    }
+    run(id);
+    // 获取当前路由参数
+  }, [run, id]);
+
+
   // const projectList: projectDetailType[] = useMemo(() => {
   //   return [
   //     {
