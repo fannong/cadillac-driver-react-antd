@@ -24,6 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
@@ -50,6 +51,7 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/crypto-js": "^4.2.2",
-    "crypto-js": "^4.2.0"
+    "crypto-js": "^4.2.0",
+    "source-map-explorer": "^2.5.3"
   }
 }

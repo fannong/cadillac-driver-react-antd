@@ -41,10 +41,15 @@ module.exports = {
     },
     configure: (webpackConfig, { env, paths }) => {
       // 在这里修改 webpackConfig 对象
-      webpackConfig.module.rules.push({
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      });
+      webpackConfig.module.rules.push(
+        {
+          test: /\.svg$/,
+          use: ["@svgr/webpack"],
+        },
+        {
+          
+        }
+      );
       return webpackConfig;
     },
   },
