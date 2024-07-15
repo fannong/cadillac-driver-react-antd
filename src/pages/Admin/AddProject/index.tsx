@@ -20,6 +20,7 @@ import { useRequest } from "ahooks";
 import { createCompany, getCompanyList } from "@/services/company";
 // import type { UploadFile } from "antd";
 import { upload } from "@/services/file";
+import MyEditor from "@/components/wangEditor";
 
 const AddProject: React.FC = () => {
   const [form] = Form.useForm();
@@ -169,17 +170,17 @@ const AddProject: React.FC = () => {
           {(fields, { add, remove }) => (
             <div style={{ display: "flex", rowGap: 16, flexDirection: "column" }}>
               {/* {JSON.stringify(errors)} */}
-              {fields.map((field) => (
+              {fields.map(({ name: fieldName, key: fieldKey, ...resetFieldProps }) => (
                 <Card
                   size="small"
                   style={{ border: "1px solid lightgray" }}
-                  title={`Company ${field.name + 1}`}
-                  key={field.key}
+                  title={`Company ${fieldName + 1}`}
+                  key={fieldKey}
                   extra={
                     editable && (
                       <CloseOutlined
                         onClick={() => {
-                          remove(field.name);
+                          remove(fieldName);
                         }}
                       />
                     )
@@ -202,7 +203,7 @@ const AddProject: React.FC = () => {
                           },
                         ]}
                         label="Company Name"
-                        name={[field.name, "companyName"]}
+                        name={[fieldName, "companyName"]}
                       >
                         <Input />
                       </Form.Item>
@@ -224,7 +225,7 @@ const AddProject: React.FC = () => {
                           },
                         ]}
                         label="Position"
-                        name={[field.name, "position"]}
+                        name={[fieldName, "position"]}
                       >
                         <Select allowClear options={userOptions} />
                       </Form.Item>
@@ -244,7 +245,7 @@ const AddProject: React.FC = () => {
                             },
                           },
                         ]}
-                        name={[field.name, "appointmentTime"]}
+                        name={[fieldName, "appointmentTime"]}
                         label="Appointment Time"
                       >
                         <DatePicker.RangePicker format={"YYYY-MM-DD"} style={{ width: "100%" }} />
@@ -255,7 +256,7 @@ const AddProject: React.FC = () => {
                       <Form.Item
                         validateTrigger={["onChange", "onBlur"]}
                         label="Company Icon"
-                        name={[field.name, "icon"]}
+                        name={[fieldName, "icon"]}
                         rules={[
                           {
                             required: true,
@@ -274,19 +275,19 @@ const AddProject: React.FC = () => {
                           maxCount={1}
                           listType="picture-card"
                           defaultFileList={
-                            form.getFieldValue(["companies", field.name, "icon"])
+                            form.getFieldValue(["companies", fieldName, "icon"])
                               ? [
                                   {
                                     uid: "-1",
                                     name: "image.png",
                                     status: "done",
-                                    url: form.getFieldValue(["companies", field.name, "icon"]),
+                                    url: form.getFieldValue(["companies", fieldName, "icon"]),
                                   },
                                 ]
                               : []
                           }
                           accept=".jpg,.jpeg,.png"
-                          customRequest={(options) => customRequest(options, field.key)}
+                          customRequest={(options) => customRequest(options, fieldKey)}
                           onChange={handleUploadChange}
                           onRemove={handleRemove}
                           // fileList={fileList}
@@ -300,7 +301,7 @@ const AddProject: React.FC = () => {
                   {/* <Col span={24}> */}
                   {/* Nest Form.List */}
                   <Form.Item label="Project List">
-                    <Form.List name={[field.name, "projects"]}>
+                    <Form.List name={[fieldName, "projects"]}>
                       {(subFields, subOpt) => (
                         <div
                           style={{
@@ -309,21 +310,21 @@ const AddProject: React.FC = () => {
                             rowGap: 16,
                           }}
                         >
-                          {subFields.map((subField) => (
-                            <Card key={subField.key}>
+                          {subFields.map(({name: subFieldName, key: subFieldKey}) => (
+                            <Card key={subFieldKey}>
                               <Row gutter={[12, 8]}>
                                 <Col span={8}>
                                   <Form.Item
                                     validateTrigger={["onChange", "onBlur"]}
                                     // rules={[{ required: true }]}
                                     label="Project Name"
-                                    name={[subField.name, "projectName"]}
+                                    name={[subFieldName, "projectName"]}
                                   >
                                     <Input placeholder="Project Name" />
                                   </Form.Item>
                                 </Col>
                                 <Col span={8}>
-                                  <Form.Item label="Used Skill" name={[subField.name, "usedSkill"]}>
+                                  <Form.Item label="Used Skill" name={[subFieldName, "usedSkill"]}>
                                     <Select
                                       allowClear
                                       mode="tags"
@@ -336,7 +337,7 @@ const AddProject: React.FC = () => {
                                   <Form.Item
                                     // noStyle
                                     label="Project Description"
-                                    name={[subField.name, "projectDesc"]}
+                                    name={[subFieldName, "projectDesc"]}
                                   >
                                     <Input.TextArea placeholder="Project Description" />
                                   </Form.Item>
@@ -344,9 +345,23 @@ const AddProject: React.FC = () => {
                                 <Col span={24}>
                                   <Form.Item
                                     label="Job Responsibility"
-                                    name={[subField.name, "jobDesc"]}
+                                    name={[subFieldName, "jobDesc"]}
                                   >
-                                    <Input.TextArea placeholder="Job Responsibility" />
+                                    {editable ? (
+                                      <MyEditor></MyEditor>
+                                    ) : (
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: form.getFieldValue([
+                                            "companies",
+                                            fieldName,
+                                            "projects",
+                                            subFieldName,
+                                            "jobDesc",
+                                          ]),
+                                        }}
+                                      ></div>
+                                    )}
                                   </Form.Item>
                                 </Col>
                               </Row>
@@ -355,7 +370,7 @@ const AddProject: React.FC = () => {
                                 <CloseOutlined
                                   style={{ position: "absolute", top: "10px", right: "10px" }}
                                   onClick={() => {
-                                    subOpt.remove(subField.name);
+                                    subOpt.remove(subFieldName);
                                   }}
                                 />
                               ) : null}
@@ -392,6 +407,7 @@ const AddProject: React.FC = () => {
           )}
         </Form.Item> */}
       </Form>
+      <div></div>
       <div className={styles.footer}>
         {editable ? (
           <Space>
