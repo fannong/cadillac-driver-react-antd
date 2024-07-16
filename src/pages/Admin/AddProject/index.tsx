@@ -1,3 +1,12 @@
+import React, { useCallback, useState } from "react";
+import styles from "./index.module.less";
+import dayjs from "dayjs";
+import { useRequest } from "ahooks";
+import { upload } from "@/services/file";
+import RichText from "@/components/Prims";
+import MyEditor from "@/components/wangEditor";
+import { createCompany, getCompanyList } from "@/services/company";
+import { CloseOutlined, UploadOutlined } from "@ant-design/icons";
 import {
   Button,
   Card,
@@ -11,23 +20,12 @@ import {
   Upload,
   message,
 } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import React, { useCallback, useEffect, useState } from "react";
-import { CloseOutlined } from "@ant-design/icons";
-import styles from "./index.module.less";
-import dayjs from "dayjs";
-import { useRequest } from "ahooks";
-import { createCompany, getCompanyList } from "@/services/company";
-// import type { UploadFile } from "antd";
-import { upload } from "@/services/file";
-import MyEditor from "@/components/wangEditor";
+import { SKILL_LIST, jobLevelOptions } from "@/common/instance";
 
 const AddProject: React.FC = () => {
   const [form] = Form.useForm();
-
-  // const [fileList, setFileList] = useState<UploadFile[]>([]);
-
   const [editable, setEditable] = useState<boolean>(false);
+  
   const { loading, run: runSubmit } = useRequest(createCompany, {
     manual: true,
     onSuccess: (res) => {
@@ -53,10 +51,6 @@ const AddProject: React.FC = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(companyList, "ccc");
-  }, [companyList]);
-
   const handleSubmit = useCallback(async () => {
     // 必须使用try catch包裹，否则页面会报错
     try {
@@ -73,11 +67,6 @@ const AddProject: React.FC = () => {
     } catch (err) {}
   }, [form, runSubmit]);
 
-  const userOptions = [
-    { value: "p5", label: "p5" },
-    { value: "p6", label: "p6" },
-    { value: "p6a", label: "p6a" },
-  ];
   const handleFinish = useCallback((values: any) => {
     console.log(values, "values");
   }, []);
@@ -126,17 +115,7 @@ const AddProject: React.FC = () => {
     [form]
   );
 
-  const skillOptionList = [
-    "Vue",
-    "React",
-    "Angular",
-    "Webpack",
-    "NodeJs",
-    "TypeScript",
-    "ElementJs",
-    "Antd",
-    "Antd Mobile",
-  ].map((item) => {
+  const skillOptionList = SKILL_LIST.map((item) => {
     return { label: item, value: item };
   });
 
@@ -227,7 +206,7 @@ const AddProject: React.FC = () => {
                         label="Position"
                         name={[fieldName, "position"]}
                       >
-                        <Select allowClear options={userOptions} />
+                        <Select allowClear options={jobLevelOptions} />
                       </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -310,7 +289,7 @@ const AddProject: React.FC = () => {
                             rowGap: 16,
                           }}
                         >
-                          {subFields.map(({name: subFieldName, key: subFieldKey}) => (
+                          {subFields.map(({ name: subFieldName, key: subFieldKey }) => (
                             <Card key={subFieldKey}>
                               <Row gutter={[12, 8]}>
                                 <Col span={8}>
@@ -350,17 +329,15 @@ const AddProject: React.FC = () => {
                                     {editable ? (
                                       <MyEditor></MyEditor>
                                     ) : (
-                                      <div
-                                        dangerouslySetInnerHTML={{
-                                          __html: form.getFieldValue([
-                                            "companies",
-                                            fieldName,
-                                            "projects",
-                                            subFieldName,
-                                            "jobDesc",
-                                          ]),
-                                        }}
-                                      ></div>
+                                      <RichText
+                                        content={form.getFieldValue([
+                                          "companies",
+                                          fieldName,
+                                          "projects",
+                                          subFieldName,
+                                          "jobDesc",
+                                        ])}
+                                      ></RichText>
                                     )}
                                   </Form.Item>
                                 </Col>
