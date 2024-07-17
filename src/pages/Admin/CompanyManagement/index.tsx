@@ -22,7 +22,7 @@ import {
 } from "antd";
 import { SKILL_LIST, jobLevelOptions } from "@/common/instance";
 
-const AddProject: React.FC = () => {
+const CompanyManagement: React.FC = () => {
   const [form] = Form.useForm();
   const [editable, setEditable] = useState<boolean>(false);
   
@@ -405,4 +405,4 @@ const AddProject: React.FC = () => {
   );
 };
 
-export default AddProject;
+export default CompanyManagement;

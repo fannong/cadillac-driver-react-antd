@@ -1,0 +1,33 @@
+// 定义一个css变量
+@formMarginRight: 10px;
+.articleWrapper {
+  padding: 20px;
+  box-sizing: border-box;
+
+  .articleForm {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .formItem {
+      width: calc(25% - @formMarginRight);
+    }
+
+    .formItem:not(:nth-child(4n)) {
+      margin-right: @formMarginRight;
+    }
+
+    .formAction {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  .tableAction {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

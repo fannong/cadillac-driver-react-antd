@@ -7,7 +7,9 @@ import Admin from "../pages/Admin";
 import Page1 from "../pages/Admin/page1";
 import Mine from "@/pages/Home/components/Mine";
 import CompanyDetail from "@/pages/Home/components/CompanyDetail";
-import AddProject from "@/pages/Admin/AddProject";
+import CompanyManagement from "@/pages/Admin/CompanyManagement";
+import ArticleManagement from "@/pages/Admin/ArticleManagement";
+import PortfolioManagement from "@/pages/Admin/PortfolioManagement";
 
 const routes = [
   {
@@ -46,7 +48,15 @@ const routes = [
     children: [
       {
         path: "addProject",
-        element: <AddProject />,
+        element: <CompanyManagement />,
+      },
+      {
+        path: "article",
+        element: <ArticleManagement />,
+      },
+      {
+        path: "portfolio",
+        element: <PortfolioManagement />,
       },
       {
         path: "page1",

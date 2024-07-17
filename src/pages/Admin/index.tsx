@@ -24,7 +24,9 @@ const Admin: React.FC = () => {
   // }
 
   const items: MenuProps["items"] = [
-    { label: "Company Management", key: "addProject", icon: null },
+    { label: "Companies", key: "addProject", icon: null },
+    { label: "Articles", key: "article", icon: null },
+    { label: "Portfolio", key: "portfolio", icon: null },
     // getItem("Navigation One", "sub1", null, [getItem("Option 1", "1"), getItem("Option 2", "2")]),
     // getItem("Navigation Two", "sub2", null, [getItem("Option 5", "5"), getItem("Option 6", "6")]),
   ];
@@ -35,8 +37,11 @@ const Admin: React.FC = () => {
         case "addProject":
           navigate("/admin/addProject");
           break;
-        case "1":
-          navigate("/admin/page1");
+        case "article":
+          navigate("/admin/article");
+          break;
+        case "portfolio":
+          navigate("/admin/portfolio");
           break;
         case "2":
           navigate("/admin/page2");
@@ -53,7 +58,7 @@ const Admin: React.FC = () => {
           onClick={onClick}
           style={{ width: 256 }}
           defaultSelectedKeys={["addProject"]}
-          defaultOpenKeys={["addProject"]}
+          // defaultOpenKeys={["addProject"]}
           mode="inline"
           items={items}
         />
